@@ -1,7 +1,7 @@
 // Initialize AOS
 AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic'});
 
-// Lazy loading for background images
+// Lazy loading for background images with progressive enhancement
 document.addEventListener('DOMContentLoaded', function() {
   // Intersection Observer for lazy loading
   const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -10,19 +10,46 @@ document.addEventListener('DOMContentLoaded', function() {
         const element = entry.target;
         const bgImage = element.style.backgroundImage;
         
-        // Create a new image to preload
-        const img = new Image();
-        img.onload = () => {
-          element.style.backgroundImage = bgImage;
-          element.classList.add('loaded');
-        };
-        img.src = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/)[1];
+        if (bgImage && bgImage !== 'none') {
+          // Extract image URL from background-image
+          const imageUrl = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/)[1];
+          
+          // Create a new image to preload with progressive loading
+          const img = new Image();
+          
+          // Start with low quality placeholder
+          element.classList.add('skeleton');
+          
+          img.onload = () => {
+            // Remove skeleton and show loaded image with blur-up effect
+            element.classList.remove('skeleton');
+            element.classList.add('blur-up');
+            element.style.backgroundImage = bgImage;
+            element.classList.add('loaded');
+            
+            // Remove blur after a short delay for smooth transition
+            setTimeout(() => {
+              element.classList.add('loaded');
+              element.classList.remove('blur-up');
+            }, 100);
+          };
+          
+          img.onerror = () => {
+            // Handle loading error
+            element.classList.remove('skeleton');
+            element.style.backgroundImage = 'none';
+            element.style.backgroundColor = 'var(--card-bg)';
+          };
+          
+          // Start loading the image
+          img.src = imageUrl;
+        }
         
         observer.unobserve(element);
       }
     });
   }, {
-    rootMargin: '50px 0px',
+    rootMargin: '100px 0px', // Start loading 100px before entering viewport
     threshold: 0.01
   });
 
@@ -54,24 +81,29 @@ document.addEventListener('DOMContentLoaded', function() {
   // Toggle mobile menu
   function toggleMenu() {
     const isOpen = navbarCollapse.classList.contains('show');
+    const navbar = document.querySelector('.navbar');
     
     if (isOpen) {
       // Close menu
       navbarCollapse.classList.remove('show');
       document.body.classList.remove('menu-open');
+      navbar.classList.remove('menu-open');
       navbarToggler.setAttribute('aria-expanded', 'false');
     } else {
       // Open menu
       navbarCollapse.classList.add('show');
       document.body.classList.add('menu-open');
+      navbar.classList.add('menu-open');
       navbarToggler.setAttribute('aria-expanded', 'true');
     }
   }
   
   // Close mobile menu function
   function closeMenu() {
+    const navbar = document.querySelector('.navbar');
     navbarCollapse.classList.remove('show');
     document.body.classList.remove('menu-open');
+    navbar.classList.remove('menu-open');
     navbarToggler.setAttribute('aria-expanded', 'false');
   }
   
