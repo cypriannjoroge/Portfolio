@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> CypVΞRSE</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
+  <link rel="apple-touch-icon" href="assets/images/logo.png">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- AOS for scroll animations -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Full‑Stack Developer · Web Designer · Data Analyst — Nairobi, Kenya">
+</head>
+<body class="bg-dark text-white">
+  <!-- Background glows -->
+  <div class="neon-glow neon-glow-1" aria-hidden="true"></div>
+  <div class="neon-glow neon-glow-2" aria-hidden="true"></div>
+  <div class="neon-glow neon-glow-3" aria-hidden="true"></div>
+
+  <!-- Navbar (persistent) -->
+  <nav class="navbar navbar-expand-md sticky-top bg-blur border-bottom border-white-10" id="navbar">
+    <div class="container">
+      <a class="navbar-brand fw-semibold text-white d-flex align-items-center gap-2" href="#home">
+        Cypverse
+        <img src="assets/images/logo.png" alt="Logo" class="brand-logo-img" onerror="this.style.display='none'">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <!-- Mobile Close Button -->
+        <button class="navbar-close d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-label="Close menu">
+          <i class="bi bi-x-lg"></i>
+        </button>
+        <ul class="navbar-nav ms-auto gap-3 small align-items-center" id="navLinks">
+          <li class="nav-item"><a class="nav-link text-white-75" href="#resume">Resume</a></li>
+          <li class="nav-item"><a class="nav-link text-white-75" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link text-white-75" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link text-white-75" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN APP WRAPPER (used for SPA transitions) -->
+  <main id="app" class="app-wrapper">
+
+    <!-- HOME / HERO -->
+    <header id="home" class="py-5 py-md-6 position-relative overflow-hidden section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h1 class="section-title">Cyprian Njoroge</h1>
+          <p class="section-subtitle">Full‑Stack Developer · Web Designer · Data Analyst</p>
+        </div>
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <ul class="contact-info" data-aos="fade-up" data-aos-delay="100">
+              <li class="contact-item" data-aos="fade-right" data-aos-delay="250">
+                <span class="contact-icon"><i class="bi bi-mortarboard-fill"></i></span>
+                <span class="contact-text">BSc. Maths with Information Technology</span>
+              </li>
+              <li class="contact-item" data-aos="fade-right" data-aos-delay="150">
+                <span class="contact-icon"><i class="bi bi-geo-alt-fill"></i></span>
+                <span class="contact-text">Nairobi, Kenya</span>
+              </li>
+              <li class="contact-item" data-aos="fade-right" data-aos-delay="300">
+                <span class="contact-icon"><i class="bi bi-envelope-fill"></i></span>
+                <a href="mailto:cypriannjoroge4@gmail.com" class="contact-link">cypriannjoroge4@gmail.com</a>
+              </li>
+              <li class="contact-item" data-aos="fade-right" data-aos-delay="350">
+                <span class="contact-icon"><i class="bi bi-phone-fill"></i></span>
+                <a href="https://wa.me/254796791767" target="_blank" class="contact-link">(+254) 796 791 767</a>
+              </li>
+            </ul>
+            <div class="d-flex gap-2 pt-2" data-aos="fade-up" data-aos-delay="150">
+              <a href="#portfolio" class="btn btn-gradient shadow">View my work</a>
+              <a href="assets/Njoroge CV.pdf" target="_blank" class="btn btn-gradient shadow"><i class="bi bi-download me-1"></i> Download CV</a>
+            </div>
+
+            <!-- Skill bars -->
+            <div class="row g-3 mt-4">
+              <div class="col-md-6">
+                <div class="card glass">
+                  <div class="card-body">
+                    <h6 class="text-white-75">Backend developer</h6>
+                    <div class="skill" data-label="PHP / Laravel" data-value="90"></div>
+                    <div class="skill" data-label="Node.js / Express" data-value="82"></div>
+                    <div class="skill" data-label="MySQL / PostgreSQL" data-value="95"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card glass">
+                  <div class="card-body">
+                    <h6 class="text-white-75">Front end developer</h6>
+                    <div class="skill" data-label="HTML / CSS / Tailwind / Bootstrap" data-value="100"></div>
+                    <div class="skill" data-label="JavaScript / React" data-value="90"></div>
+                    <div class="skill" data-label="Figma / UI Design" data-value="70"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 d-flex flex-wrap gap-2 small">
+              <span class="pill"><i class="bi bi-palette2 me-1"></i>Python</span>
+              <span class="pill"><i class="bi bi-graph-up me-1"></i>R</span>
+              <span class="pill"><i class="bi bi-cpu me-1"></i>STATA</span>
+              <span class="pill"><i class="bi bi-database me-1"></i>MySQL</span>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="portrait" style="background-image: url('assets/images/Prfl.png');" data-aos="zoom-in">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- RESUME -->
+    <section id="resume" class="py-5 section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2 class="section-title">Resume</h2>
+          <p class="section-subtitle">My professional journey and expertise</p>
+        </div>
+        <div class="timeline">
+          <div class="tl-item" data-aos="fade-up">
+            <span class="dot"></span>
+            <h6>B.Sc Information Technology & Mathematics — Masinde Muliro University of Science & Technology (2021–2025)</h6>
+            <p class="text-white-75 small mb-0">Focused on software development, database management, algorithms, and applied mathematics, gaining strong problem-solving and analytical skills.</p>
+          </div>
+          <div class="tl-item" data-aos="fade-up" data-aos-delay="80">
+            <span class="dot"></span>
+            <h6>Computer Short Course — Optic Computer College (2021)</h6>
+            <p class="text-white-75 small mb-0">Completed a Computer Short Course, gaining foundational knowledge in programming and software applications.</p>
+          </div>
+          <div class="tl-item" data-aos="fade-up" data-aos-delay="160">
+            <span class="dot"></span>
+            <h6>Software Developer Intern — Aimsofts LTD (April 2024 – September 2024)</h6>
+            <p class="text-white-75 small mb-0">Assisted in the design, development, and deployment of full-stack web applications, implementing backend logic, CRUD operations, and authentication with Laravel and MySQL. Developed responsive frontend interfaces using Tailwind CSS and Bootstrap, ensuring usability and consistency across devices. Collaborated with senior developers and project managers to deliver and maintain core application features, contributing to team productivity and project goals.</p>
+          </div>
+          <div class="tl-item" data-aos="fade-up" data-aos-delay="240">
+            <span class="dot"></span>
+            <h6>Research & Data Analyst Intern — AMREC LTD (April 2025 – August 2025)</h6>
+            <p class="text-white-75 small mb-0">Conducted data cleaning, visualization, and statistical analysis on real-world datasets using Python, R, and STATA to generate actionable insights. Supported research initiatives by developing proposals, applying ethical methodologies, and presenting findings in collaborative group projects. Applied basic machine learning techniques and visualization tools to uncover patterns, improve reporting, and support data-driven decision-making.</p>
+             <div class="d-flex gap-2 pt-2" data-aos="fade-up" data-aos-delay="150">
+              <a href="assets/Cyprian Njoroge certficate.pdf" target="_blank" class="btn btn-gradient shadow"><i class="bi bi-download me-1"></i>Certificate</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+
+    <!-- PORTFOLIO (Grid view) -->
+    <section id="portfolio" class="py-5 section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2 class="section-title">My Portfolio</h2>
+          <p class="section-subtitle">A showcase of my recent projects</p>
+        </div>
+        <div class="filters mb-3 d-flex gap-2 small">
+          <button class="btn btn-sm btn-outline-light" data-filter="all">All</button>
+          <button class="btn btn-sm btn-outline-light" data-filter="Websites">Websites</button>
+          <button class="btn btn-sm btn-outline-light" data-filter="design">Web Designs</button>
+        </div>
+        <div class="row g-4" id="grid">
+          <!-- Project 1 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="0" data-tag="design">
+            <div class="card project" data-id="1">
+              <div class="thumb-carousel">
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/beepay.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/beepay2.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/beepay3.png')"></div>
+                <div class="project-title-overlay">BeePay</div>
+              </div>
+              <div class="meta small">
+                <div class="fw-semibold mb-1">BeePay – Fintech Landing Page Design
+               > A modern, responsive web design focused on clean layouts, intuitive navigation, and strong visual hierarchy.</div>
+                <div class="text-white-75 mb-2">Web design</div>
+                <a href="https://beepay-six.vercel.app/" target="_blank" class="btn btn-sm btn-gradient" data-open="1">
+                  View Case Study <i class="bi bi-arrow-right-short"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 2 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="60" data-tag="Apps">
+            <div class="card project" data-id="2">
+              <div class="thumb-carousel">
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/strings1.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/strings2.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/strings3.png')"></div>
+                <div class="project-title-overlay">Strings Attached</div>
+              </div>
+              <div class="meta small">
+                <div class="fw-semibold mb-1">From stylish shirts and scarves to elegant dresses, every piece is designed to blend tradition with modern fashion. Enjoy secure payments, customizable designs, and convenient  delivery.</div>
+                <div class="text-white-75 mb-2">HTML/CSS/JS/React Web application</div>
+                <a href="https://stringsattached-eight.vercel.app/" target="_blank" class="btn btn-sm btn-gradient" data-open="2">
+                  View Case Study <i class="bi bi-arrow-right-short"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 3 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="120" data-tag="Article">
+            <div class="card project" data-id="3">
+              <div class="thumb-carousel">
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/martin1.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/martin2.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/martin3.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/martin4.png')"></div>
+                <div class="project-title-overlay">St. Martin CSA</div>
+              </div>
+              <div class="meta small">
+                <div class="fw-semibold mb-1">community-based organization dedicated to empowering local communities through solidarity, support, and sustainable development programs.</div>
+                <div class="text-white-75 mb-2">Laravel web application</div>
+                <a href="https://github.com/cypriannjoroge/StMartin.git" target="_blank" class="btn btn-sm btn-gradient" data-open="3">
+                  View Case Study <i class="bi bi-arrow-right-short"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 4 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="180" data-tag="Websites">
+            <div class="card project" data-id="4">
+              <div class="thumb-carousel">
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/tamzi1.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/tamzi2.jpeg')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/tamzi3.png')"></div>
+                <div class="project-title-overlay">Tamzi Foods</div>
+              </div>
+              <div class="meta small">
+                <div class="fw-semibold mb-1">Developed and deployed a fully responsive food delivery website using HTML, CSS, and JavaScript, gaining practical experience in front-end development while improving my coding and problem-solving skills.</div>
+                <div class="text-white-75 mb-2">HTML/CSS/JS/React Web application</div>
+                <a href="https://tamzifoods.netlify.app/" target="_blank" class="btn btn-sm btn-gradient" data-open="4">
+                  View Case Study <i class="bi bi-arrow-right-short"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 5 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="240" data-tag="Websites">
+            <div class="card project" data-id="5">
+              <div class="thumb-carousel">
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/mett1.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/mett2.jpeg')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/mett3.png')"></div>
+                <div class="project-title-overlay">Mett Barber</div>
+              </div>
+              <div class="meta small">
+                <div class="fw-semibold mb-1">Independently designed a website from scratch using Figma, gaining hands-on experience with the tool while continuing to build and refine my design skills.</div>
+                <div class="text-white-75 mb-2">Web design</div>
+                <a href="https://mett-barber.vercel.app/" target="_blank" class="btn btn-sm btn-gradient" data-open="5">
+                  View Case Study <i class="bi bi-arrow-right-short"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 6 -->
+          <div class="col-md-4" data-aos="fade-up" data-aos-delay="240" data-tag="Websites">
+            <div class="card project" data-id="6">
+              <div class="thumb-carousel">
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/vams.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/vams.png')"></div>
+                <div class="thumb-slide" style="background-image:url('assets/images/portfolio/vams.png')"></div>
+                <div class="project-title-overlay">VAMS System</div>
+              </div>
+              <div class="meta small">
+                <div class="fw-semibold mb-1">A structured Laravel-based system featuring clean dashboards, intuitive navigation, and role-based authorization.The design features organized layouts that support efficient user interaction and a professional system experience.</div>
+                <div class="text-white-75 mb-2">Laravel Web App</div>
+                <a href="https://github.com/calebmacharia/aims-system.git" target="_blank" class="btn btn-sm btn-gradient" data-open="5">
+                  View Case Study <i class="bi bi-arrow-right-short"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+       
+
+   
+ <!-- SERVICES -->
+    <section id="services" class="py-5 section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2 class="section-title">What I Offer</h2>
+          <p class="section-subtitle">Comprehensive solutions tailored to your needs</p>
+        </div>
+        
+        <div class="row g-4">
+          <!-- Web Development Services -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card h-100">
+              <div class="service-icon mb-3">
+                <i class="bi bi-code-slash"></i>
+              </div>
+              <h3 class="h5 mb-3">Web Development Services</h3>
+              <ul class="service-features">
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Web Development – Custom, responsive websites.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Backend Solutions – Secure, scalable systems.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Full-Stack Apps – Complete end-to-end solutions.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- UI/UX Design -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-card h-100">
+              <div class="service-icon mb-3">
+                <i class="bi bi-brush"></i>
+              </div>
+              <h3 class="h5 mb-3">UI/UX Design</h3>
+              <ul class="service-features">
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Prototyping – Interactive wireframes and mockups.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> User-Centered Design – Focused on usability and aesthetics.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Responsive Interfaces – Seamless across devices.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- API Development & Integration -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card h-100">
+              <div class="service-icon mb-3">
+                <i class="bi bi-plug"></i>
+              </div>
+              <h3 class="h5 mb-3">API Development & Integration</h3>
+              <ul class="service-features">
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Custom APIs – Tailored endpoints for unique needs.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Third-Party Integration – Seamless connectivity with tools.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Secure Data Flow – Encrypted and efficient transfers.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Database Management -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card h-100">
+              <div class="service-icon mb-3">
+                <i class="bi bi-database"></i>
+              </div>
+              <h3 class="h5 mb-3">Database Management</h3>
+              <ul class="service-features">
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Database Design – Scalable structures with MySQL/PostgreSQL.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Optimization – Fast queries and performance tuning.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Data Security – Backup and recovery solutions.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Cloud & Deployment -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="150">
+            <div class="service-card h-100">
+              <div class="service-icon mb-3">
+                <i class="bi bi-cloud"></i>
+              </div>
+              <h3 class="h5 mb-3">Cloud & Deployment</h3>
+              <ul class="service-features">
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Hosting – Reliable cloud solutions (AWS, Azure, Vercel).</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> CI/CD – Automated testing and deployments.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Scalability – Systems that grow with user demand.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Research & Data Analysis -->
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card h-100">
+              <div class="service-icon mb-3">
+                <i class="bi bi-graph-up"></i>
+              </div>
+              <h3 class="h5 mb-3">Research & Data Analysis</h3>
+              <ul class="service-features">
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Data Cleaning – Preparing accurate datasets.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Visualization – Charts and dashboards with insights.</li>
+                <li><i class="bi bi-check-circle text-primary me-2"></i> Machine Learning – Basic predictive modeling.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-5 section">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <h2 class="section-title">Get In Touch</h2>
+          <p class="section-subtitle">Let's work together on your next project</p>
+        </div>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+          <a class="social" href="https://github.com/cypverse" target="_blank" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          <a class="social" href="https://www.linkedin.com/in/" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a class="social" href="mailto:cypriannjoroge4@gmail.com" aria-label="Email"><i class="bi bi-envelope"></i></a>
+          <a class="social" href="https://cypverse.netlify.app/" target="_blank" aria-label="Website"><i class="bi bi-globe2"></i></a>
+          <a class="social" href="https://wa.me/254796791767" target="_blank" aria-label="WhatsApp"><i class="bi bi-telephone"></i></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (persistent) -->
+  <footer class="border-top border-white-10 py-4 text-center text-white-60 small">
+    © Copyright<span id="year"></span>.Designed by  CypVΞRSE
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
