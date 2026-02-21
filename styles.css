@@ -13,6 +13,17 @@
   --card-hover: rgba(255, 255, 255, 0.1);
 }
 
+/* Lazy loading for background images */
+.lazy-bg {
+  background-color: var(--card-bg);
+  background-image: none !important;
+  transition: background-image 0.3s ease;
+}
+
+.lazy-bg.loaded {
+  background-image: var(--bg-image) !important;
+}
+
 /* Light theme */
 [data-theme="light"] {
   --bg: #f8f9fa;
@@ -810,51 +821,69 @@ footer span:first-child {
     background: rgba(11, 15, 26, 0.95) !important;
     border-radius: 1rem;
     margin-top: 1rem;
-    padding: 1rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    backdrop-filter: blur(12px);
     border: 1px solid var(--border);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .navbar-collapse.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
   
   [data-theme="light"] .navbar-collapse {
     background: rgba(248, 249, 250, 0.95) !important;
   }
   
-  #nav {
-    display: block;
-    width: 100%;
-    padding: 0.5rem 0 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+  .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem;
+    transition: all 0.3s ease;
   }
   
-  #nav::before {
-    display: none;
+  .navbar-toggler:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+  }
+  
+  .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
   }
   
   .navbar-nav {
     flex-direction: column;
     width: 100%;
     padding: 0;
+    gap: 0.5rem !important;
   }
   
   .nav-item {
     width: 100%;
-    margin: 0.2rem 0;
+    text-align: center;
   }
   
   .nav-link {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
     display: block;
     width: 100%;
-    padding: 0.8rem 1.2rem !important;
-    margin: 0.2rem 0;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
-    text-align: center;
-    border-radius: 50px;
   }
   
   .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
     transform: translateX(5px);
   }
   
@@ -868,16 +897,16 @@ footer span:first-child {
     position: absolute;
     top: 0.75rem;
     right: 0.75rem;
-    width: 36px;
-    height: 36px;
-    border: none;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     transition: all 0.3s ease;
     z-index: 1050;
   }
@@ -889,6 +918,11 @@ footer span:first-child {
   
   .navbar-close i {
     font-size: 1.2rem;
+  }
+  
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
   }
 }
 

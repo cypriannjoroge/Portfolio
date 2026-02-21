@@ -1,0 +1,15 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "A fully static, no-backend portfolio using HTML + CSS + Bootstrap + a dash of JS, with: - Neon dark theme + glow - Animated skill bars - Portfolio grid with filters - **Case Study** pages (SPA-style routing using `#/project/:id`) - Persistent Navbar + Footer - Smooth fade/slide page transitions",
+  "main": "optimize-images.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
+}

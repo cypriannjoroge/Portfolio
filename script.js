@@ -1,6 +1,47 @@
 // Initialize AOS
 AOS.init({ once: true, duration: 700, easing: 'ease-out-cubic'});
 
+// Lazy loading for background images
+document.addEventListener('DOMContentLoaded', function() {
+  // Intersection Observer for lazy loading
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const element = entry.target;
+        const bgImage = element.style.backgroundImage;
+        
+        // Create a new image to preload
+        const img = new Image();
+        img.onload = () => {
+          element.style.backgroundImage = bgImage;
+          element.classList.add('loaded');
+        };
+        img.src = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/)[1];
+        
+        observer.unobserve(element);
+      }
+    });
+  }, {
+    rootMargin: '50px 0px',
+    threshold: 0.01
+  });
+
+  // Observe all thumb-slide elements
+  document.querySelectorAll('.thumb-slide').forEach(slide => {
+    const bgImage = slide.style.backgroundImage;
+    if (bgImage && bgImage !== 'none') {
+      // Store original background image
+      slide.style.setProperty('--bg-image', bgImage);
+      // Remove background image initially
+      slide.style.backgroundImage = 'none';
+      // Add lazy class
+      slide.classList.add('lazy-bg');
+      // Start observing
+      imageObserver.observe(slide);
+    }
+  });
+});
+
 // Mobile menu functionality
 document.addEventListener('DOMContentLoaded', function() {
   const navbarToggler = document.querySelector('.navbar-toggler');
@@ -12,49 +53,52 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Toggle mobile menu
   function toggleMenu() {
-    document.body.classList.toggle('menu-open');
-    navbarCollapse.classList.toggle('show');
-    navbarToggler.setAttribute('aria-expanded', 
-      navbarToggler.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
-    );
+    const isOpen = navbarCollapse.classList.contains('show');
+    
+    if (isOpen) {
+      // Close menu
+      navbarCollapse.classList.remove('show');
+      document.body.classList.remove('menu-open');
+      navbarToggler.setAttribute('aria-expanded', 'false');
+    } else {
+      // Open menu
+      navbarCollapse.classList.add('show');
+      document.body.classList.add('menu-open');
+      navbarToggler.setAttribute('aria-expanded', 'true');
+    }
   }
   
-  // Close mobile menu when clicking outside
-  function closeMenu(e) {
-    if (!navbarCollapse.contains(e.target) && !navbarToggler.contains(e.target)) {
-      document.body.classList.remove('menu-open');
-      navbarCollapse.classList.remove('show');
-      navbarToggler.setAttribute('aria-expanded', 'false');
-    }
+  // Close mobile menu function
+  function closeMenu() {
+    navbarCollapse.classList.remove('show');
+    document.body.classList.remove('menu-open');
+    navbarToggler.setAttribute('aria-expanded', 'false');
   }
   
   // Event listeners
   if (navbarToggler) navbarToggler.addEventListener('click', toggleMenu);
-  if (navbarClose) navbarClose.addEventListener('click', toggleMenu);
-  document.addEventListener('click', closeMenu);
+  if (navbarClose) navbarClose.addEventListener('click', closeMenu);
   
-  // Close menu when clicking on nav links
+  // Close menu when clicking outside (only on mobile)
+  document.addEventListener('click', function(e) {
+    if (window.innerWidth < 992) {
+      if (!navbarCollapse.contains(e.target) && !navbarToggler.contains(e.target)) {
+        closeMenu();
+      }
+    }
+  });
+  
+  // Close menu when clicking on nav links (only on mobile)
   navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      if (window.innerWidth < 992) { // Only for mobile
+    link.addEventListener('click', function(e) {
+      if (window.innerWidth < 992) {
         // Small delay to allow navigation to start before closing menu
         setTimeout(() => {
-          toggleMenu();
+          closeMenu();
         }, 100);
       }
     });
   });
-  
-  // Sync theme toggle buttons
-  if (themeToggle && themeToggleMobile) {
-    const syncThemeToggle = (e) => {
-      const otherToggle = e.target === themeToggle ? themeToggleMobile : themeToggle;
-      otherToggle.click();
-    };
-    
-    themeToggle.addEventListener('click', syncThemeToggle);
-    themeToggleMobile.addEventListener('click', syncThemeToggle);
-  }
   
   // Handle window resize
   let resizeTimer;
@@ -67,11 +111,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Close menu when resizing to desktop
     if (window.innerWidth >= 992) {
-      document.body.classList.remove('menu-open');
-      navbarCollapse.classList.remove('show');
-      navbarToggler.setAttribute('aria-expanded', 'false');
+      closeMenu();
     }
   });
+  
+  // Handle escape key to close menu
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && navbarCollapse.classList.contains('show')) {
+      closeMenu();
+    }
+  });
+  
+  // Sync theme toggle buttons
+  if (themeToggle && themeToggleMobile) {
+    const syncThemeToggle = (e) => {
+      const otherToggle = e.target === themeToggle ? themeToggleMobile : themeToggle;
+      otherToggle.click();
+    };
+    
+    themeToggle.addEventListener('click', syncThemeToggle);
+    themeToggleMobile.addEventListener('click', syncThemeToggle);
+  }
 });
 
 // Theme Toggle Functionality
