@@ -1334,15 +1334,17 @@ footer span:first-child {
 .skill { 
   margin: 1.2rem 0;
   position: relative;
+  min-height: 30px;
 }
 
 .skill::before { 
   content: attr(data-label) ' '; 
   display: flex; 
   justify-content: space-between; 
-  color: var(--muted); 
-  font-size: .9rem; 
-  margin-bottom: .5rem;
+  font-size: 0.85rem;
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
   transition: all 0.3s ease;
 }
 
@@ -1355,10 +1357,9 @@ footer span:first-child {
   content: ""; 
   display: block; 
   height: 10px; 
-  border-radius: 999px; 
-  background: rgba(255, 255, 255, .12); 
-  position: relative;
-  overflow: hidden;
+  background: var(--card-bg);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.5s ease;
 }
 
@@ -1371,15 +1372,25 @@ footer span:first-child {
 .skill > .fill {
   background: linear-gradient(90deg, #6366f1, #e879f9) !important;
   box-shadow: 0 0 12px rgba(99, 102, 241, 0.4) !important;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  border-radius: 999px;
+  transition: width 0.3s ease;
 }
 
 .skill > .value { 
   position: absolute; 
   right: 8px; 
   top: -20px; 
-  font-size: .8rem; 
-  color: var(--muted);
+  background: linear-gradient(135deg, #6366f1, #e879f9);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  z-index: 10;
 }
 
 /* Timeline */

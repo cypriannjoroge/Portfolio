@@ -212,41 +212,63 @@ document.addEventListener('scroll', setActiveLink);
 setActiveLink();
 
 // Animate skill bars
-document.querySelectorAll('.skill').forEach(el => {
-  const value = Number(el.dataset.value || 0);
-  const bar = document.createElement('div');
-  bar.className = 'fill';
-  bar.style.width = '0%';
-  bar.style.height = '10px';
-  bar.style.borderRadius = '999px';
-  el.appendChild(bar);
+function initSkillBars() {
+  const skillElements = document.querySelectorAll('.skill');
+  console.log(`Found ${skillElements.length} skill elements`);
+  
+  skillElements.forEach((el, index) => {
+    const value = Number(el.dataset.value || 0);
+    console.log(`Skill ${index + 1}: ${el.dataset.label} - ${value}%`);
+    
+    // Remove existing elements if any
+    const existingFill = el.querySelector('.fill');
+    const existingValue = el.querySelector('.value');
+    if (existingFill) existingFill.remove();
+    if (existingValue) existingValue.remove();
+    
+    // Create progress bar
+    const bar = document.createElement('div');
+    bar.className = 'fill';
+    bar.style.width = '0%';
+    bar.style.height = '10px';
+    bar.style.borderRadius = '999px';
+    el.appendChild(bar);
 
-  // percent label
-  const label = document.createElement('span');
-  label.className = 'value';
-  label.textContent = value + '%';
-  el.style.position = 'relative';
-  el.appendChild(label);
+    // Create percent label
+    const label = document.createElement('span');
+    label.className = 'value';
+    label.textContent = value + '%';
+    el.style.position = 'relative';
+    el.appendChild(label);
 
-  // animate on view
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        let start = 0;
-        const step = () => {
-          start += (value - start) * 0.08;
-          bar.style.width = start.toFixed(1) + '%';
-          if (Math.abs(start - value) > .5) requestAnimationFrame(step);
-          else bar.style.width = value + '%';
-        };
-        requestAnimationFrame(step);
-        el.classList.add('fill');
-        observer.disconnect();
-      }
-    });
+    // Animate on view
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          console.log(`Animating skill: ${el.dataset.label} to ${value}%`);
+          let start = 0;
+          const step = () => {
+            start += (value - start) * 0.08;
+            bar.style.width = start.toFixed(1) + '%';
+            if (Math.abs(start - value) > .5) requestAnimationFrame(step);
+            else bar.style.width = value + '%';
+          };
+          requestAnimationFrame(step);
+          el.classList.add('fill');
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    observer.observe(el);
   });
-  observer.observe(el);
-});
+}
+
+// Initialize skill bars when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSkillBars);
+} else {
+  initSkillBars();
+}
 
 // Portfolio + Case Studies SPA
 // Projects data is now in static HTML sections in index.html
