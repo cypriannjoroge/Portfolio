@@ -270,6 +270,38 @@ if (document.readyState === 'loading') {
   initSkillBars();
 }
 
+// Back to Top Button
+const backToTopButton = document.getElementById('backToTop');
+
+// Show/hide back to top button based on scroll position
+function toggleBackToTopButton() {
+  if (window.scrollY > 300) {
+    backToTopButton.classList.add('show');
+  } else {
+    backToTopButton.classList.remove('show');
+  }
+}
+
+// Scroll to top when button is clicked
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+// Initialize back to top button
+if (backToTopButton) {
+  // Show/hide button on scroll
+  window.addEventListener('scroll', toggleBackToTopButton);
+  
+  // Scroll to top on click
+  backToTopButton.addEventListener('click', scrollToTop);
+  
+  // Initial check
+  toggleBackToTopButton();
+}
+
 // Portfolio + Case Studies SPA
 // Projects data is now in static HTML sections in index.html
 
