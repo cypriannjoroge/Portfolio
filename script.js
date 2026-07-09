@@ -211,22 +211,24 @@ const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers
 setTheme(savedTheme);
 
 // Toggle theme when button is clicked
-themeToggle.addEventListener('click', () => {
-  const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  setTheme(newTheme);
-  localStorage.setItem('theme', newTheme);
-});
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const newTheme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+}
 
 // Set theme function
 function setTheme(theme) {
   if (theme === 'light') {
     html.setAttribute('data-theme', 'light');
-    moonIcon.classList.remove('d-none');
-    sunIcon.classList.add('d-none');
+    if (moonIcon) moonIcon.classList.remove('d-none');
+    if (sunIcon) sunIcon.classList.add('d-none');
   } else {
     html.removeAttribute('data-theme');
-    moonIcon.classList.add('d-none');
-    sunIcon.classList.remove('d-none');
+    if (moonIcon) moonIcon.classList.add('d-none');
+    if (sunIcon) sunIcon.classList.remove('d-none');
   }
 }
 
@@ -336,83 +338,16 @@ if (backToTopButton) {
   toggleBackToTopButton();
 }
 
-// Portfolio + Case Studies SPA
-// Projects data is now in static HTML sections in index.html
-
-const portfolioSection = document.getElementById('portfolio');
-
-// Attach click handlers to static project cards - open corresponding case study
-document.querySelectorAll('#grid .card.project a[data-open]').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const id = btn.dataset.open;
-    const caseStudySection = document.getElementById(`case-study-${id}`);
-    if (caseStudySection) {
-      history.pushState({ id }, '', `#/project/${id}`);
-      animateSwap(portfolioSection, caseStudySection);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  });
-});
-
-// Filters (hide/show static cards)
+// Portfolio filters (hide/show static cards)
 document.querySelectorAll('.filters .btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.filters .btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const filter = btn.dataset.filter;
-    const cards = document.querySelectorAll('#grid > .col-md-4');
+    const cards = document.querySelectorAll('#grid > [data-tag]');
     cards.forEach(card => {
       const tag = card.dataset.tag;
       card.style.display = (filter === 'all' || tag === filter) ? '' : 'none';
     });
   });
 });
-
-function animateSwap(hideEl, showEl){
-  hideEl.classList.add('section-exit');
-  hideEl.classList.remove('section-enter', 'section-enter-active');
-  requestAnimationFrame(() => hideEl.classList.add('section-exit-active'));
-  setTimeout(() => {
-    hideEl.classList.add('d-none');
-    hideEl.classList.remove('section-exit', 'section-exit-active');
-    showEl.classList.remove('d-none');
-    showEl.classList.add('section-enter');
-    requestAnimationFrame(() => showEl.classList.add('section-enter-active'));
-    setTimeout(() => showEl.classList.remove('section-enter', 'section-enter-active'), 550);
-  }, 420);
-}
-
-// Attach click handlers to all back buttons in case studies
-document.querySelectorAll('.case-study .back-to-portfolio').forEach(btn => {
-  btn.addEventListener('click', () => {
-    history.pushState({}, '', `#portfolio`);
-    const caseStudySection = btn.closest('.case-study');
-    animateSwap(caseStudySection, portfolioSection);
-    setActiveLink();
-  });
-});
-
-// Handle hash routing for deep links
-function handleRouteFromHash(){
-  const hash = location.hash;
-  const match = hash.match(/^#\/project\/(\d+)/);
-  if(match){
-    const id = Number(match[1]);
-    const caseStudySection = document.getElementById(`case-study-${id}`);
-    if(caseStudySection) {
-      animateSwap(portfolioSection, caseStudySection);
-    }
-  }else{
-    // Default: show portfolio, hide all case studies
-    document.querySelectorAll('.case-study').forEach(cs => {
-      if(!cs.classList.contains('d-none')){
-        animateSwap(cs, portfolioSection);
-      }
-    });
-  }
-}
-window.addEventListener('popstate', handleRouteFromHash);
-window.addEventListener('hashchange', handleRouteFromHash);
-
-handleRouteFromHash();
