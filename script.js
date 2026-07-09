@@ -67,6 +67,40 @@ document.addEventListener('DOMContentLoaded', function() {
       imageObserver.observe(slide);
     }
   });
+
+  // Ensure the initial visible thumbnails load correctly even if JS runs before styles/layout settle
+  // (helps prevent blank/white slides on some browsers)
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.thumb-slide.lazy-bg').forEach(slide => {
+      if (slide.getBoundingClientRect().top < window.innerHeight + 200) {
+        const bgImage = slide.style.getPropertyValue('--bg-image');
+        if (bgImage && bgImage !== 'none') {
+          slide.style.backgroundImage = 'none';
+          slide.classList.remove('loaded');
+          // Swap to background-image via the same logic used by the observer
+          const imageUrl = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/)?.[1];
+          if (!imageUrl) return;
+          const img = new Image();
+          img.onload = () => {
+            slide.classList.remove('skeleton');
+            slide.classList.add('blur-up');
+            slide.style.backgroundImage = bgImage;
+            slide.classList.add('loaded');
+            setTimeout(() => {
+              slide.classList.add('loaded');
+              slide.classList.remove('blur-up');
+            }, 100);
+          };
+          img.onerror = () => {
+            slide.classList.remove('skeleton');
+            slide.style.backgroundImage = 'none';
+            slide.style.backgroundColor = 'var(--card-bg)';
+          };
+          img.src = imageUrl;
+        }
+      }
+    });
+  });
 });
 
 // Mobile menu functionality
