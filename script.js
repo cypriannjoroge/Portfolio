@@ -26,8 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             element.classList.add('blur-up');
             element.style.backgroundImage = bgImage;
             element.classList.add('loaded');
-            
-            // Remove blur after a short delay for smooth transition
+                        // Remove blur after a short delay for smooth transition
             setTimeout(() => {
               element.classList.add('loaded');
               element.classList.remove('blur-up');
